@@ -7,3 +7,8 @@ def hello():
 
 if __name__ == "__main__":
     app.run("78.91.20.230")
+
+@app.route('/')
+def index():
+    """Just a generic index page to show."""
+    return render_template('index.html')
