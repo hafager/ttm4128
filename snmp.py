@@ -5,7 +5,10 @@ from time import sleep
 
 def snmp_os():
 
-    return check_output(["snmpwalk", "-v", "2c", "-c", "ttm4128", "129.241.209.10", "sysDescr"]).splitlines()
+    os = check_output(["snmpwalk", "-v", "2c", "-c", "ttm4128", "129.241.209.10", "sysDescr"]).splitlines()
+    for i in range(len(os)):
+        os[i] = " ".join(os[i].split()[3:])
+    return os
 
 def snmp_interface():
     
@@ -30,7 +33,7 @@ def snmp_interface():
     return interface
 
 
-
+snmp_os()
 
 
 

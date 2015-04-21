@@ -20,7 +20,10 @@ def cim_os():
 
 		for key, value in os.items():
 			if (key == 'Version'):
-				osVersion.append(value)
+				pretty_name = value[value.find("PRETTY_NAME"):]
+				pretty_name = pretty_name[pretty_name.find('"')+1:]
+				pretty_name = pretty_name[:pretty_name.find('"')]
+				osVersion.append(pretty_name)
 	return osVersion
 
 # #This function gets the information about the names, ip adresses and maskes from the CIM 
