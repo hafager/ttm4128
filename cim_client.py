@@ -11,20 +11,46 @@ conn = pywbem.WBEMConnection(CIMEndpoint)
 #Here we get the information about the operating system
 def os():
 	#EnumerateInstances returns a list of CIMNamedInstance objects which contain the instance name and instance of for each and every instance of the CIM_OperatinSystem class
-	osConn = conn.EnumerateInstances('CIM_OperatingSystem')[0]
+	names = conn.EnumerateInstanceNames('CIM_OperatingSystem')
+
+	osVersion =[]
 	#Returns only the information we want
-	return (osConn["version"])
+	for n in names:
+		os = conn.GetInstance(n)
 
+		for key, value in os.items():
+			if (key == 'Version'):
+				osVersion.append(value)
+	return osVersion
 
-#This function gets the information about the names, ip adresses and maskes from the CIM 
-def ipInterface():
+# #This function gets the information about the names, ip adresses and maskes from the CIM 
+def interface():
 	#EnumerateInstances returns a list of CIMNamedInstance objects which contain the instance name and instance of for each and every instance of the CIM_IPProtocolEndpoint class
-	ipConn = conn.EnumerateInstances('CIM_IPProtocolEndpoint')[0]
-	#Gets the names from the string
-	name = ipConn["ElementName"]
-	#Gets the ip adresses from the string
-	ip = ipConn["IPv4Address"]
-	#Gets the maskes from the string
-	mask = ipConn["SubnetMask"]
-	return name,ip,mask
+	namess = conn.EnumerateInstanceNames('CIM_IPProtocolEndpoint')
+
+	interface =[]
+	name = []
+	ip =[]
+	mask = []
+
+	for n in namess:
+		os = conn.GetInstance(n)
+
+		for key, value in os.items():
+			if (key == "ElementName"):
+				name.append(value)
+			if (key == "IPv4Address"):
+				ip.append(value)
+			if (key == "SubnetMask"):
+				mask.append(value)
+
+	interface.append(name)
+	interface.append(ip)
+	interface.append(mask)
+
+	return interface
+
+print os()
+print interface()
+
 
