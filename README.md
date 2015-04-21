@@ -7,8 +7,5 @@ Code related to task 2 in ttm4128
 ##### For flask
 `sudo pip install flask`
 
-##### For flask_bootstrap
-`sudo pip install flask_bootstrap`
-
 ##### For pysnmp
 `sudo pip install pysnmp`
