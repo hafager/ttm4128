@@ -8,23 +8,22 @@ CIMEndpoint = "http://ttm4128.item.ntnu.no:5988"
 conn = pywbem.WBEMConnection(CIMEndpoint)
 
 
-# This method return a list of operation systems stripped down to the only information we want to display
+# This method returns the operation system stripped down to the only information we want to display
 def cim_os():
 	#EnumerateInstances returns a list of CIMNamedInstance objects which contain the instance name and instance of for each and every instance of the CIM_OperatinSystem class
 	names = conn.EnumerateInstanceNames('CIM_OperatingSystem')
 
 	osVersion =[]
 	#Returns only the information we want
-	for n in names:
-		os = conn.GetInstance(n)
+	os = conn.GetInstance(names[0])
 
-		for key, value in os.items():
-			if (key == 'Version'):
-				# Formats the string correctly
-				pretty_name = value[value.find("PRETTY_NAME"):]
-				pretty_name = pretty_name[pretty_name.find('"')+1:]
-				pretty_name = pretty_name[:pretty_name.find('"')]
-				osVersion.append(pretty_name)
+	for key, value in os.items():
+		if (key == 'Version'):
+			# Formats the string correctly
+			pretty_name = value[value.find("PRETTY_NAME"):]
+			pretty_name = pretty_name[pretty_name.find('"')+1:]
+			pretty_name = pretty_name[:pretty_name.find('"')]
+			osVersion.append(pretty_name)
 	return osVersion
 
 # #This function gets the information about the names, ip adresses and masks from the CIM 

@@ -7,9 +7,8 @@ def snmp_os():
     #Enters the command "snmpwalk -v 2c -c ttm4128 129.241.209.10 sysDescr" in terminal and returns the output.
     os = check_output(["snmpwalk", "-v", "2c", "-c", "ttm4128", "129.241.209.10", "sysDescr"]).splitlines()
     
-    #removes the unecessary overhead to the os information for all oses on the given ip-address
-    for i in range(len(os)):
-        os[i] = " ".join(os[i].split()[3:])
+    #removes the unecessary overhead to the os information for the os on the given ip-address
+    os[0] = " ".join(os[0].split()[3:])
     return os
 
 def snmp_interface():
