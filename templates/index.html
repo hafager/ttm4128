@@ -1,11 +1,15 @@
 {% extends "bootstrap/base.html" %}
-
-{% block navbar %}
-<div class="navbar navbar-fixed-top">
-  <!-- ... -->
-</div>
-{% endblock %}
-
-{% block content %}
-  <h1>Hello, Bootstrap</h1>
+{% block doc %}
+	{% block html %}
+		{% block head %}
+			{% block title %}
+				TTM4128
+			{% endblock %}
+		{% endblock %}
+		{% block content %}
+		  <h1>Hello, Bootstrap</h1>
+		  {% print name %}
+		  
+		{% endblock %}
+	{% endblock %}
 {% endblock %}

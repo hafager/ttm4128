@@ -8,18 +8,18 @@ Bootstrap(app)
 
 
 
-
-
-@app.route('/')
-def index():
-    """Just a generic index page to show."""
-    return render_template('index.html')
-
 #Calls the os function
 operatingSystemInfo = os()
 
 #Calls the function to get the name, ip and mask
 name,ip,mask = ipInterface()
+
+@app.route('/')
+def index():
+    """Just a generic index page to show."""
+    return render_template('index.html', name=name)
+
+
 
 #Tells Flask what URL should trigger our function.
 @app.route('/hello')
