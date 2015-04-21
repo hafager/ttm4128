@@ -1,5 +1,6 @@
 from flask import Flask, render_template
-from cim_client import ipInterface, os
+from cim_client import cim_interface, cim_os
+from snmp import snmp_interface, snmp_os
 
 
 app = Flask(__name__)
@@ -10,7 +11,7 @@ snmp_os = snmp_os()
 
 #Calls the function to get the name, ip and mask
 cim_interfaces = cim_interface()
-snmp_interfaces = cim_interface()
+snmp_interfaces = snmp_interface()
 
 @app.route('/')
 def index():
