@@ -5,21 +5,32 @@ from time import sleep
 
 def snmp_os():
 
-    return check_output(["snmpwalk", "-v", "2c", "-c", "ttm4128", "129.241.209.10", "sysDescr"])
+    return check_output(["snmpwalk", "-v", "2c", "-c", "ttm4128", "129.241.209.10", "sysDescr"]).splitlines()
 
-def snmp_ip_interface():
-    name = check_output(["snmpwalk", "-v", "2c", "-c", "ttm4128", "129.241.209.10", "ifDescr"])
-  
-  
-    ip = check_output(["snmpwalk", "-v", "2c", "-c", "ttm4128", "129.241.209.10", "ipAdEntAddr"])
+def snmp_interface():
     
-    mask = check_output(["snmpwalk", "-v", "2c", "-c", "ttm4128", "129.241.209.10", "ipAdEntNetMask"])
-    return name, ip, mask
+    name = check_output(["snmpwalk", "-v", "2c", "-c", "ttm4128", "129.241.209.10", "ifDescr"]).splitlines()
 
-name, ip, mask = snmp_ip_interface()
-print( name)
-print( ip)
-print( mask)
-print( snmp_os())
+    ip = check_output(["snmpwalk", "-v", "2c", "-c", "ttm4128", "129.241.209.10", "ipAdEntAddr"]).splitlines()
+    
+    mask = check_output(["snmpwalk", "-v", "2c", "-c", "ttm4128", "129.241.209.10", "ipAdEntNetMask"]).splitlines()
+    
+    interface = []
+
+    for n in range(len(name)):
+    	interface.append([name[n].split()[-1]])
+
+    for i in range(len(ip)):
+    	address = ip[i].split()
+    	interface[i].append(address[-1])
+
+    for m in range(len(mask)):
+    	interface[m].append(mask[m].split()[-1])
+
+    return interface
+
+
+
+
 
 
