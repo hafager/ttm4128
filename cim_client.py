@@ -39,7 +39,7 @@ def cim_interface():
 		interfacex = ["","",""]
 		for key, value in os.items():
 			if (key == "ElementName"):
-				interfacex[0]=value
+				interfacex[0]=value[value.find("_")+1:]
 			if (key == "IPv4Address"):
 				interfacex[1]=value
 			if (key == "SubnetMask"):
