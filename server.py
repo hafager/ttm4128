@@ -8,11 +8,11 @@ import socket
 myIpAdress = socket.gethostbyname(socket.gethostname())
 app = Flask(__name__)
 
-#Calls the os function
+#Calls the os function for both cim and snmp
 cim_os = cim_os()
 snmp_os = snmp_os()
 
-#Calls the function to get the name, ip and mask
+#Calls the function to get the name, ip and mask for both cim and snmp
 cim_interfaces = cim_interface()
 snmp_interfaces = snmp_interface()
 
