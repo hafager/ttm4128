@@ -33,7 +33,4 @@ def snmp_interface():
     return interface
 
 
-snmp_os()
-
-
 
